@@ -1,15 +1,15 @@
-import sql from 'mssql/msnodesqlv8.js';
+import sql from 'mssql';
 
 const config = {
-    database: 'node_pos', // SQL Server database name
-    server: '173.249.56.16', // Remote SQL Server IP address
-    driver: 'msnodesqlv8',
-    options: {
-        enableArithAbort: true, // Required for modern SQL Server versions
-        trustServerCertificate: true // Trust the server certificate for local dev
-    },
     user: 'sa', // SQL Server username
-    password: 'its2514LOVE!' // SQL Server password
+    password: 'its2514LOVE!', // SQL Server password
+    server: '173.249.56.16', // Remote SQL Server IP address
+    database: 'node_pos', // SQL Server database name
+    options: {
+        encrypt: false, // Encrypt connections to the SQL Server
+        trustServerCertificate: true, // Trust the server certificate (useful for self-signed certificates)
+        enableArithAbort: true // Required for modern SQL Server versions
+    }
 };
 
 async function connectToDatabase() {

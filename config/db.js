@@ -2,13 +2,14 @@ import sql from 'mssql/msnodesqlv8.js';
 
 const config = {
     database: 'node_pos', // SQL Server database name
-    server: 'localhost\\SQLEXPRESS', // Use 'localhost' or IP address
+    server: '173.249.56.16', // Remote SQL Server IP address
     driver: 'msnodesqlv8',
     options: {
-        trustedConnection: true, // Use Windows Authentication
         enableArithAbort: true, // Required for modern SQL Server versions
         trustServerCertificate: true // Trust the server certificate for local dev
-    }
+    },
+    user: 'sa', // SQL Server username
+    password: 'its2514LOVE!' // SQL Server password
 };
 
 async function connectToDatabase() {

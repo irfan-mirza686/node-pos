@@ -8,6 +8,7 @@ import brandRoutes from './routes/brandRoutes.js'
 import unitRoutes from './routes/unitRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import customerRoutes from './routes/customerRoutes.js'
+import saleRoutes from './routes/saleRoutes.js'
 import cloudinary from 'cloudinary'
 
 // dot env config
@@ -37,6 +38,7 @@ app.use('/api/v1/brand', brandRoutes)
 app.use('/api/v1/unit', unitRoutes)
 app.use('/api/v1/product', productRoutes)
 app.use('/api/v1/customer', customerRoutes)
+app.use('/api/v1/sale', saleRoutes)
 
 // Handle 404 errors for undefined routes
 app.use((req, res) => {

@@ -22,6 +22,27 @@ const isProductNameUnique = async (field, value, id = null) => {
     }
 };
 
+// Function to check if a barcode is unique, skipping the current ID
+const isBarcodeUnique = async (value, id = null) => {
+    try {
+        const pool = await connectToDatabase();
+        const query = id
+            ? `SELECT COUNT(*) AS count FROM products WHERE barcode = @value AND id <> @id`
+            : `SELECT COUNT(*) AS count FROM products WHERE barcode = @value`;
+
+        const result = await pool.request()
+            .input('value', sql.NVarChar, value)
+            .input('id', sql.Int, id)
+            .query(query);
+
+        return result.recordset[0].count === 0;
+    } catch (error) {
+        console.error('Error querying the database:', error);
+        throw new Error('Database query failed');
+    }
+};
+
+
 // Regular expression to check if the string starts with a digit
 const doesNotStartWithDigit = (value) => !/^\d/.test(value);
 
@@ -53,7 +74,14 @@ export const createProductValidation = [
         .notEmpty().withMessage('Selling Price is required'),
 
     body('barcode')
-        .notEmpty().withMessage('Product Code is required'),
+        .notEmpty().withMessage('Product Code is required')
+        .custom(async (value) => {
+            const isUnique = await isBarcodeUnique(value);
+            if (!isUnique) {
+                throw new Error('Barcode already exists');
+            }
+            return true;
+        }),
 
     body('unit')
         .notEmpty().withMessage('Unit is required'),
@@ -95,8 +123,30 @@ export const updateProductValidation = [
     body('selling_price')
         .notEmpty().withMessage('Selling Price is required'),
 
-    body('barcode')
-        .notEmpty().withMessage('Product Code is required'),
+        body('barcode')
+        .notEmpty().withMessage('Product Code is required')
+        .custom(async (value, { req }) => {
+            // Get the existing product's barcode from the database
+            const pool = await connectToDatabase();
+            const currentProductResult = await pool.request()
+                .input('id', sql.Int, req.params.id)
+                .query('SELECT barcode FROM products WHERE id = @id');
+
+            if (currentProductResult.recordset.length === 0) {
+                throw new Error('Product not found');
+            }
+
+            const currentBarcode = currentProductResult.recordset[0].barcode;
+
+            // Only check for uniqueness if the barcode is being changed
+            if (value !== currentBarcode) {
+                const isUnique = await isBarcodeUnique(value);
+                if (!isUnique) {
+                    throw new Error('Barcode already exists');
+                }
+            }
+            return true;
+        }),
 
     body('unit')
         .notEmpty().withMessage('Unit is required'),

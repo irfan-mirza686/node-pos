@@ -82,9 +82,9 @@ export const getPorductById = async (req, res) => {
         const pool = await connectToDatabase(); // Use the function to get the connection pool
         const result = await pool.request()
             .input('id', sql.Int, id)
-            .query('SELECT * FROM units WHERE id = @id');
+            .query('SELECT * FROM products WHERE id = @id');
         if (result.recordset.length === 0) {
-            return handleResponse(res, 404, 'Unit not found', false);
+            return handleResponse(res, 404, 'Product not found', false);
         }
         handleResponse(res, 200, result.recordset[0]);
     } catch (error) {

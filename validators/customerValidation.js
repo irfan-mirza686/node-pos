@@ -1,5 +1,5 @@
 import { body, param } from 'express-validator';
-import sql from 'mssql/msnodesqlv8.js';
+import sql from 'mssql';
 import connectToDatabase from '../config/db.js';
 
 // Function to check if a product name is unique, skipping the current ID

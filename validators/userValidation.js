@@ -37,19 +37,19 @@ export const createUserValidation = [
 
     // Validate the name field
     
-    body('name')
-        .isString().withMessage('User Name must be a string')
-        .optional()
-        .isLength({ max: 100 }).withMessage('User Name must be at most 100 characters long')
-        .custom(doesNotStartWithDigit).withMessage('Name should not start with a digit')
-        .custom(async (value, { req }) => {
+    // body('name')
+    //     .isString().withMessage('User Name must be a string')
+    //     .optional()
+    //     .isLength({ max: 100 }).withMessage('User Name must be at most 100 characters long')
+    //     .custom(doesNotStartWithDigit).withMessage('Name should not start with a digit')
+    //     .custom(async (value, { req }) => {
             
-            const isUnique = await isUserUnique('name', value, req.params.id);
-            if (!isUnique) {
-                throw new Error('User name already exists');
-            }
-            return true;
-        }),
+    //         const isUnique = await isUserUnique('name', value, req.params.id);
+    //         if (!isUnique) {
+    //             throw new Error('User name already exists');
+    //         }
+    //         return true;
+    //     }),
 
     // Validate the email field
     body('email')
@@ -107,18 +107,18 @@ export const updateUserValidation = [
     //     .notEmpty().withMessage('ID is required'),
 
     // Validate the name field
-    body('name')
-        .isString().withMessage('User Name must be a string')
-        .optional()
-        .isLength({ max: 100 }).withMessage('User Name must be at most 100 characters long')
-        .custom(doesNotStartWithDigit).withMessage('Name should not start with a digit')
-        .custom(async (value, { req }) => {
-            const isUnique = await isUserUnique('name', value, req.params.id);
-            if (!isUnique) {
-                throw new Error('User name already exists');
-            }
-            return true;
-        }),
+    // body('fname')
+    //     .isString().withMessage('User Name must be a string')
+    //     .optional()
+    //     .isLength({ max: 100 }).withMessage('User Name must be at most 100 characters long')
+    //     .custom(doesNotStartWithDigit).withMessage('Name should not start with a digit')
+    //     .custom(async (value, { req }) => {
+    //         const isUnique = await isUserUnique('name', value, req.params.id);
+    //         if (!isUnique) {
+    //             throw new Error('User name already exists');
+    //         }
+    //         return true;
+    //     }),
 
     // Validate the email field
     body('email')

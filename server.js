@@ -3,9 +3,10 @@ import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes.js'
+import rolePermissionRoutes from './routes/rolePermissionRoutes.js'
 import brandRoutes from './routes/brandRoutes.js'
 import unitRoutes from './routes/unitRoutes.js'
-import rolePermissionRoutes from './routes/rolePermissionRoutes.js'
+import productRoutes from './routes/productRoutes.js'
 // import connectToDatabase from './config/db.js'
 
 // dot env config
@@ -22,13 +23,11 @@ app.use(cors())
 
 
 // ROutes...
-
-
-
 app.use('/api/v1/user', userRoutes)
+app.use('/api/v1/role', rolePermissionRoutes)
 app.use('/api/v1/brand', brandRoutes)
 app.use('/api/v1/unit', unitRoutes)
-app.use('/api/v1/role', rolePermissionRoutes)
+app.use('/api/v1/product', productRoutes)
 
 // Handle 404 errors for undefined routes
 app.use((req, res) => {
@@ -37,10 +36,6 @@ app.use((req, res) => {
         message: 'Route not found'
     });
 });
-
-// app.get("/",(req,res) => {
-//     return res.status(200).send("<h1>Welcome to POS ok</h1>")
-// })
 
 // port 
 const PORT = process.env.PORT || 8080;

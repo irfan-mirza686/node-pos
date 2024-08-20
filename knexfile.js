@@ -1,66 +1,22 @@
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
-export default {
+// knexfile.js
 
+export default {
   development: {
     client: 'mssql',
     connection: {
-      server: 'localhost\\SQLEXPRESS', // Use the correct server and instance name
-      database: 'node_pos',            // Replace with your database name
-      driver: 'tedious',
+      user: 'sa', // Your SQL Server username
+      password: 'its2514LOVE!', // Your SQL Server password
+      server: '173.249.56.16', // Your SQL Server IP address
+      database: 'node_pos', // Your SQL Server database name
       options: {
-        trustedConnection: true,       // Use Windows Authentication
-        enableArithAbort: true,        // Required for modern SQL Server versions
-        trustServerCertificate: true   // Trust the server certificate for local dev
+        encrypt: false, // Use true if you're using an encrypted connection
+        trustServerCertificate: true, // Trust the server certificate
+        enableArithAbort: true, // Required for modern SQL Server versions
       }
     },
     migrations: {
-      directory: './migrations',       // Directory to store migration files
-      tableName: 'knex_migrations'     // Table to keep track of migrations
+      directory: './migrations', // Directory where migration files are stored
+      tableName: 'knex_migrations' // Table to track migrations
     }
-  },
-
-  // staging: {
-  //   client: 'mssql',
-  //   connection: {
-  //     server: 'localhost\\SQLEXPRESS',
-  //     database: 'node_pos',
-  //     options: {
-  //       trustedConnection: true,
-  //       enableArithAbort: true,
-  //       trustServerCertificate: true
-  //     }
-  //   },
-  //   migrations: {
-  //     directory: './migrations',
-  //     tableName: 'knex_migrations'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   }
-  // },
-
-  // production: {
-  //   client: 'mssql',
-  //   connection: {
-  //     server: 'localhost\\SQLEXPRESS',
-  //     database: 'node_pos',
-  //     options: {
-  //       trustedConnection: true,
-  //       enableArithAbort: true,
-  //       trustServerCertificate: true
-  //     }
-  //   },
-  //   migrations: {
-  //     directory: './migrations',
-  //     tableName: 'knex_migrations'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   }
-  // }
-
+  }
 };

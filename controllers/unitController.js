@@ -20,7 +20,6 @@ export const createUnit = async (req, res) => {
 // Get all units
 export const getAllUnits = async (req, res) => {
     try {
-        console.log('okk')
         const pool = await connectToDatabase(); // Use the function to get the connection pool
         const result = await pool.request().query('SELECT * FROM units');
         handleResponse(res, 200, result.recordset);

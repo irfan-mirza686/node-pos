@@ -7,7 +7,7 @@ import {
     deletePorductById
 } from '../controllers/productController.js'; // Import individual controller functions
 
-
+import { singleUpload } from "../middlewares/Multer.js";
 import { validationResult } from 'express-validator';
 import { createProductValidation, updateProductValidation } from '../validators/productValidation.js';
 
@@ -23,7 +23,7 @@ const validate = (req, res, next) => {
 };
 
 // Define routes and associate them with controller functions
-router.post('/create', createProductValidation, validate, createPorduct); // Create a new product
+router.post('/create', createProductValidation, validate, singleUpload, createPorduct); // Create a new product
 router.get('/', getAllPorducts); // Get all products
 router.get('/:id', getPorductById); // Get a product by ID
 router.put('/:id', updateProductValidation, validate, updatePorductById); // Update a product by ID

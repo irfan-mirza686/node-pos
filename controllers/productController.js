@@ -1,6 +1,8 @@
 import connectToDatabase from '../config/db.js';
 import { handleResponse } from '../utils/responseHandler.js'; // Import the response handler
 import sql from 'mssql/msnodesqlv8.js'; // Ensure correct import for sql
+import cloudniary from 'cloudinary';
+import { getDataUri } from "../utils/features.js";
 
 function createSlug(text) {
     return text
@@ -25,6 +27,7 @@ export const createPorduct = async (req, res) => {
         quantity,
         details_page
     } = req.body;
+  
     try {
         const product_type = 'finished_goods';
         const type = 'non_gs1';

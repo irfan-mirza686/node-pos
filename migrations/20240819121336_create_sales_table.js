@@ -16,7 +16,7 @@ export async function up(knex) {
         table.date('date').nullable();
         table.text('time').nullable();
         table.text('description', 'longtext').nullable();
-        table.text('items').nullable();
+        table.text('items','longtext').nullable();
         table.string('status').nullable().defaultTo('confirmed');
         table.float('net_with_vat').nullable();
         table.float('total').nullable();

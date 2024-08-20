@@ -1,6 +1,6 @@
 import connectToDatabase from '../config/db.js';
 import { handleResponse } from '../utils/responseHandler.js';
-import sql from 'mssql/msnodesqlv8.js';
+import sql from 'mssql';
 
 export const createRolePermission = async (req, res) => {
 

@@ -1,6 +1,6 @@
 import connectToDatabase from '../config/db.js';
 import { handleResponse } from '../utils/responseHandler.js'; // Import the response handler
-import sql from 'mssql/msnodesqlv8.js'; // Ensure correct import for sql
+import sql from 'mssql';
 import cloudniary from 'cloudinary';
 import { getDataUri } from "../utils/features.js";
 

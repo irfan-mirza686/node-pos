@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import connectToDatabase from '../config/db.js';
 
 import { handleResponse } from '../utils/responseHandler.js'; // Import the response handler
-import sql from 'mssql/msnodesqlv8.js'; // Ensure correct import for sql
+import sql from 'mssql';
 
 // Create a new User
 export const createUser = async (req, res) => {
